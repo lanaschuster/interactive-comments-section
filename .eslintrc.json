@@ -1,0 +1,25 @@
+{
+  "env": {
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/vue3-recommended"
+  ],
+  "parserOptions": {
+    "project": "./jsconfig.json"
+  },
+  "rules": {
+    "vue/no-unused-vars": "error",
+    "no-extra-parens": "error",
+    "no-unexpected-multiline": "error",
+    "accessor-pairs": [ "error", {
+      "getWithoutSet": false,
+      "setWithoutGet": true
+    }],
+    "quotes": [ 1, "single" ],
+    "semi": [ "error", "always" ]
+  }
+}

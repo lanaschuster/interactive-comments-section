@@ -1,25 +1,36 @@
-# Vue-Webpack Boilerplate
+# Interactive Comments Section
 
-This is a Vue 3 + Webpack 5 boilerplate project, which might help you to have a fast initialization of a brand new App. This boilerplate deliver to you a base project with the following pre-configurated libraries:
+(Under construction)
 
-- Vue 3
-- Webpack 5
-- Babel
-- Sass Loader
-- Storybook
-- Jest
-- Vue Test Utils
-- Faker.js
-- Husky
-- Lint Staged
-- ESLint
-- Vue Router
-- Axios
+## Tasks
 
 
-It is on the roadmap:
-- Pinia
-- i18n
+- Criar folha de estilos (design system)
+- Criar componente avatar 
+  -- variantes: small, medium
+- Criar componente button 
+  -- type: default, text;
+  -- variants: primary, danger; 
+  -- size: small, medium;
+- Criar componente card
+- Criar componente textarea
+- Criar componente tag
+- Criar componente user
+  -- possui um avatar small;
+  -- possui label com username;
+  -- possui uma tag para indicar se é o próprio usuário logado (tag "you")
+- Criar componente contador
+- Criar componente link
+- Criar componente Comentário
+  -- modos: visualização, edição
+- Criar componente modal
+
+Extra:
+- Permitir ocultar os comentários de um post
+  -- quando estiver fechado, mostrar um indicador de quantos comentários possui
+- Criar componente toast
+  -- para apresentar uma resposta de sucesso ou erro após cada ação do usuário
+
 
 ## Setup
 
@@ -36,14 +47,6 @@ It is on the roadmap:
 
   $ yarn build 	      // to generate the bundle in production mode
 ```
-
-## How it works?
-
-### About the scaffolding
-
-You are not obligated to follow project scaffolding. The structure contained within "src" can be modified, what we have there is just an example of how you can organize your project. Just be careful with the folder "src/http" and "src/router" because of the configuration made in "src/index.js".
-
-All content in "src/components" and "src/modules" can be erased as they are just a proof of concept that the settings made are working correctly.
 
 
 ## Contributing

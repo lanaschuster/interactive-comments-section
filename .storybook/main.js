@@ -15,6 +15,7 @@ module.exports = {
   "core": {
     "builder": "@storybook/builder-webpack5"
   },
+  "staticDirs": ['../public'],
   webpackFinal: async (config) => {
     Object.assign(config.resolve.alias, {
       '@': path.resolve(__dirname, '../src')

@@ -5,8 +5,8 @@
 ## Tasks
 
 
-- Criar folha de estilos (design system)
-- Criar componente avatar 
+- (done) Criar folha de estilos (design system)
+- (done) Criar componente avatar 
   -- variantes: small, medium
 - Criar componente button 
   -- type: default, text;

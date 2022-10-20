@@ -3,12 +3,14 @@
 </template>
 
 <style lang="scss">
+@import '@/assets/styles/main.scss';
+
 body {
   margin: 0;
   padding: 0;
 }
 * {
-  font-family: 'Rubik', Geneva, Verdana, sans-serif;
-  font-weight: 400;
+  font-family: $font-family;
+  font-weight: $font-weight-regular;
 }
 </style>

@@ -8,10 +8,9 @@
 - (done) Criar folha de estilos (design system)
 - (done) Criar componente avatar 
   -- variantes: small, medium
-- Criar componente button 
+- (done) Criar componente button 
   -- type: default, text;
-  -- variants: primary, danger; 
-  -- size: small, medium;
+  -- variants: primary, danger;
 - Criar componente card
 - Criar componente textarea
 - Criar componente tag

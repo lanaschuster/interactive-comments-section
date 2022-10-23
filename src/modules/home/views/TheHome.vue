@@ -1,25 +1,16 @@
 <template>
-  <section>
-    <h1 class="title">
-      Vue 3 + Webpack 5 Boilerplate
-    </h1>
-    <RandomPoetry />
-  </section>
+  <section />
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
-
-const RandomPoetry = defineAsyncComponent(() => import('../components/RandomPoetry/RandomPoetry.vue'));
-
 export default {
-  components: {
-    RandomPoetry
-  }
+
 };
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/main.scss';
+
 section {
   height: 100%;
   display: flex;
@@ -28,6 +19,6 @@ section {
   align-items: center;
 }
 .title {
-  color: blue;
+  color: $primary;
 }
 </style>

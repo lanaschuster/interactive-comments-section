@@ -1,15 +1,14 @@
-import { shallowMount } from '@vue/test-utils';
-import { faker } from '@faker-js/faker';
+import { createWrapper, faker } from '@/test';
 import AppAvatar from './AppAvatar';
 
 describe('Testing AppAvatar component', () => {
   it('has the "medium" class based on props.variant', async () => {
-    const wrapper = shallowMount(AppAvatar);
+    const wrapper = createWrapper(AppAvatar);
     expect(wrapper.classes()).toContain('medium');
   });
 
   it('has the "small" class based on props.variant', async () => {
-    const wrapper = shallowMount(AppAvatar, {
+    const wrapper = createWrapper(AppAvatar, {
       props: {
         variant: 'small'
       }
@@ -21,7 +20,7 @@ describe('Testing AppAvatar component', () => {
   it('renders the image', async () => {
     const imagePath = faker.image.imageUrl();
 
-    const wrapper = shallowMount(AppAvatar, {
+    const wrapper = createWrapper(AppAvatar, {
       attrs: {
         src: imagePath
       }

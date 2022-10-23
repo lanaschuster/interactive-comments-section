@@ -11,7 +11,7 @@
 - (done) Criar componente button 
   -- type: default, text;
   -- variants: primary, danger;
-- Criar componente card
+- (done) Criar componente card
 - Criar componente textarea
 - Criar componente tag
 - Criar componente user

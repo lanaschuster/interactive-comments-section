@@ -12,8 +12,8 @@
   -- type: default, text;
   -- variants: primary, danger;
 - (done) Criar componente card
-- Criar componente textarea
-- Criar componente tag
+- (done) Criar componente textarea
+- (done) Criar componente tag
 - Criar componente user
   -- possui um avatar small;
   -- possui label com username;

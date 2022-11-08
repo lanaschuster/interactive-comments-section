@@ -14,7 +14,7 @@
 - (done) Criar componente card
 - (done) Criar componente textarea
 - (done) Criar componente tag
-- Criar componente user
+- (done) Criar componente user
   -- possui um avatar small;
   -- possui label com username;
   -- possui uma tag para indicar se é o próprio usuário logado (tag "you")

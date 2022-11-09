@@ -18,7 +18,7 @@
   -- possui um avatar small;
   -- possui label com username;
   -- possui uma tag para indicar se é o próprio usuário logado (tag "you")
-- Criar componente contador
+- (done) Criar componente contador
 - Criar componente link
 - Criar componente Comentário
   -- modos: visualização, edição

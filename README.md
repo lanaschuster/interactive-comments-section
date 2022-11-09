@@ -19,7 +19,7 @@
   -- possui label com username;
   -- possui uma tag para indicar se é o próprio usuário logado (tag "you")
 - (done) Criar componente contador
-- Criar componente link
+- (done) Criar componente link
 - Criar componente Comentário
   -- modos: visualização, edição
 - Criar componente modal

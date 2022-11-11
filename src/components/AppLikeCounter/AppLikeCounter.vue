@@ -6,7 +6,7 @@
       @click="like"
     />
     <span class="counter">
-      {{ counter }}
+      {{ modelValue }}
     </span>
     <i
       class="fa-solid fa-minus icon dislike"
@@ -17,21 +17,24 @@
 </template>
 
 <script>
-import { ref } from 'vue';
 export default {
-  setup() {
-    const counter = ref(0);
-
+  props: {
+    modelValue: {
+      type: Number,
+      default: 0
+    }
+  },
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
     const like = () => {
-      counter.value++;
+      emit('update:modelValue', props.modelValue+1);
     };
 
     const dislike = () => {
-      counter.value--;
+      emit('update:modelValue', props.modelValue-1);
     };
 
     return {
-      counter,
       like,
       dislike
     };
@@ -57,6 +60,7 @@ export default {
   background-color: $neutral-light;
   font-weight: $font-weight-semibold;
   position: relative;
+  height: fit-content;
 
   .icon {
     color: $secondary;

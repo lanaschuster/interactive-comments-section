@@ -52,6 +52,7 @@ export default {
   font-family: $font-family;
   border: 1px solid transparent;
   font-weight: $font-weight-semibold;
+  max-height: 48px;
 
   .flex-wrapper {
     display: flex;

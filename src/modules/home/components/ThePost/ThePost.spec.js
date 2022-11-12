@@ -1,4 +1,5 @@
 import { createMountedWrapper, faker } from '@/test';
+import { createTestingPinia } from '@pinia/testing';
 import ThePost from './ThePost';
 
 describe('Testing ThePost', () => {
@@ -18,7 +19,10 @@ describe('Testing ThePost', () => {
     wrapper = createMountedWrapper(ThePost, {
       props: {
         post
-      }
+      },
+      global: {
+        plugins: [createTestingPinia()],
+      },
     });
   });
 

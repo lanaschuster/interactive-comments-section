@@ -23,7 +23,7 @@
         type="text"
         variant="danger"
         data-testid="delete"
-        @click="$emit('delete', true)"
+        @click="$emit('delete', post.id)"
       >
         <i class="fa-solid fa-trash" /> Delete
       </AppButton>
@@ -31,7 +31,7 @@
         v-if="post.user.isCurrent"
         type="text"
         data-testid="edit"
-        @click="$emit('edit', true)"
+        @click="$emit('edit', post)"
       >
         <i class="fa-solid fa-pencil" /> Edit
       </AppButton>

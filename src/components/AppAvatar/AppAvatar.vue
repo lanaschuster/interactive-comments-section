@@ -25,8 +25,12 @@ img {
 }
 .small {
   width: 2rem;
+  max-width: 2rem;
+  max-height: 2rem;
 }
 .medium {
   width: 2.8rem;
+  max-width: 2.8rem;
+  max-height: 2.8rem;
 }
 </style>

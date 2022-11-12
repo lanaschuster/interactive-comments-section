@@ -19,6 +19,7 @@
     "@babel/core": "^7.19.0",
     "@babel/preset-env": "^7.19.0",
     "@faker-js/faker": "^7.5.0",
+    "@pinia/testing": "^0.0.14",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-interactions": "^6.5.12",

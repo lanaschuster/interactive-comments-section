@@ -6,19 +6,32 @@
       v-model:likes="post.likes"
       :post="post"
     />
+    <ThePostForm
+      :user="getUser"
+      :parent-id="null"
+      @send="onSend"
+    >
+      <template #form-button>
+        SEND
+      </template>
+    </ThePostForm>
   </section>
 </template>
 
 <script>
 import { ref } from 'vue';
+import { useUserStore } from '@/store/user.js';
 import { usePostsStore } from '@/store/posts.js';
 import ThePost from '@/modules/home/components/ThePost/ThePost.vue';
+import ThePostForm from '@/modules/home/components/ThePostForm/ThePostForm.vue';
 
 export default {
   components: {
-    ThePost
+    ThePost,
+    ThePostForm
   },
   setup() {
+    const userStore = useUserStore();
     const postsStore = usePostsStore();
     const posts = ref(postsStore.getPosts);
 
@@ -26,8 +39,14 @@ export default {
       posts.value = state.posts;
     });
 
+    function onSend(post) {
+      postsStore.addPost(post);
+    }
+
     return {
-      posts
+      posts,
+      onSend,
+      getUser: userStore.getUser
     };
   }
 };

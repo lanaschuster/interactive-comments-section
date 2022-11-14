@@ -1,5 +1,5 @@
 <template>
-  <AppCard>
+  <AppCard class="post-form">
     <div class="post-form-layout">
       <AppAvatar
         :src="user.avatar"
@@ -77,6 +77,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.post-form {
+  width: 100%;
+  max-width: 768px;
+}
 .post-form-layout {
   display: flex;
   column-gap: 16px;

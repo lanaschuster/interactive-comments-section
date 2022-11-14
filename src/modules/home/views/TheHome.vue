@@ -45,4 +45,10 @@ section {
   padding: 32px;
   row-gap: 24px;
 }
+
+@media screen and (max-width: 425px) {
+  section {
+    padding: 12px;
+  }
+}
 </style>

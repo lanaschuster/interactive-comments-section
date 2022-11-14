@@ -82,4 +82,19 @@ export default {
     position: absolute;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .app-like-counter {
+    flex-direction: row;
+
+    .like {
+      margin-bottom: 0;
+      margin-right: 16px;
+    }
+    .dislike {
+      margin-top: 0;
+      margin-left: 16px;
+    }
+  }
+}
 </style>

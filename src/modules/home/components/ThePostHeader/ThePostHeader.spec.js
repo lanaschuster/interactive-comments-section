@@ -26,36 +26,4 @@ describe('Testing ThePostHeader', () => {
     const user = wrapper.find('[data-testid="user"]');
     expect(user.exists()).toBeTruthy();
   });
-
-  it('renders the reply button when is not the current user', async () => {
-    const reply = wrapper.find('[data-testid="reply"]');
-    expect(reply.exists()).toBeTruthy();
-
-    await reply.trigger('click');
-    expect(wrapper.emitted()['reply']).toBeTruthy();
-    expect(wrapper.emitted()['reply'].length).toBe(1);
-  });
-
-  it('renders the delete and edit button when is the current user', async () => {
-    post.user.isCurrent = true;
-    wrapper = createWrapper(ThePostHeader, {
-      props: {
-        post
-      }
-    });
-
-    const deleteBtn = wrapper.find('[data-testid="delete"]');
-    expect(deleteBtn.exists()).toBeTruthy();
-
-    await deleteBtn.trigger('click');
-    expect(wrapper.emitted()['delete']).toBeTruthy();
-    expect(wrapper.emitted()['delete'].length).toBe(1);
-
-    const editBtn = wrapper.find('[data-testid="edit"]');
-    expect(editBtn.exists()).toBeTruthy();
-
-    await editBtn.trigger('click');
-    expect(wrapper.emitted()['edit']).toBeTruthy();
-    expect(wrapper.emitted()['edit'].length).toBe(1);
-  });
 });

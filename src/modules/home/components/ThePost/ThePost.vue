@@ -1,27 +1,36 @@
 <template>
   <div class="the-post">
     <AppCard>
-      <div class="post-layout">
-        <AppLikeCounter
-          v-model="likes"
-          data-testid="likeCounter"
-        />
-        <div class="post-body">
+      <ThePostLayout>
+        <template #side>
+          <AppLikeCounter
+            v-model="likes"
+            data-testid="likeCounter"
+          />
+        </template>
+        <template #header>
           <ThePostHeader
             :post="post"
             data-testid="postHeader"
-            @reply="formState.showForm = true"
-            @delete="onDelete"
-            @edit="onEdit"
           />
+        </template>
+        <template #body>
           <p
             class="post-text"
             data-testid="postContent"
           >
             {{ post.text }}
           </p>
-        </div>
-      </div>
+        </template>
+        <template #actions>
+          <ThePostActions
+            :post="post"
+            @reply="formState.showForm = true"
+            @delete="onDelete"
+            @edit="onEdit"
+          />
+        </template>
+      </ThePostLayout>
     </AppCard>
     <ThePostForm 
       v-if="formState.showForm"
@@ -42,17 +51,22 @@
 import { computed, reactive } from 'vue';
 import { useUserStore } from '@/store/user.js';
 import { usePostsStore } from '@/store/posts.js';
+
 import AppCard from '@/components/AppCard/AppCard.vue';
 import AppLikeCounter from '@/components/AppLikeCounter/AppLikeCounter.vue';
 import ThePostHeader from '@/modules/home/components/ThePostHeader/ThePostHeader.vue';
+import ThePostActions from '@/modules/home/components/ThePostActions/ThePostActions.vue';
 import ThePostForm from '@/modules/home/components/ThePostForm/ThePostForm.vue';
+import ThePostLayout from '@/modules/home/layouts/ThePostLayout.vue';
 
 export default {
   components: {
     AppCard,
     AppLikeCounter,
     ThePostHeader,
-    ThePostForm
+    ThePostForm,
+    ThePostLayout,
+    ThePostActions
   },
   props: {
     post: {
@@ -126,38 +140,12 @@ export default {
 .the-post {
   display: flex;
   flex-direction: column;
-  width: 768px;
+  width: 100%;
   max-width: 768px;
   row-gap: 8px;
 }
-.post-layout {
-  display: flex;
-  column-gap: 24px;
-
-  .post-body {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    .post-header {
-      display: flex;
-      justify-content: space-between;
-
-      .post-header-details {
-        display: flex;
-        column-gap: 16px;
-        align-items: center;
-
-        .post-date {
-          color: $neutral-medium;
-        }
-      }
-    }
-
-    .post-text {
-      color: $neutral-medium;
-      line-height: 120%;
-    }
-  }
+.post-text {
+  color: $neutral-medium;
+  line-height: 120%;
 }
 </style>

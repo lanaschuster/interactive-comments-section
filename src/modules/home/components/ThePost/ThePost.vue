@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div class="the-post">
     <AppCard>
@@ -18,14 +19,13 @@
           <p
             class="post-text"
             data-testid="postContent"
-          >
-            {{ post.text }}
-          </p>
+            v-html="usePostTextFormatter(post.text)"
+          />
         </template>
         <template #actions>
           <ThePostActions
             :post="post"
-            @reply="formState.showForm = true"
+            @reply="onReply"
             @delete="onDelete"
             @edit="onEdit"
           />
@@ -38,7 +38,7 @@
       :parent-id="formState.mode === 'REPLY' ? post.id : null"
       :post-id="formState.mode === 'UPDATE' ? post.id : null"
       :text="formState.formText"
-      @send="onReply"
+      @send="reply"
     >
       <template #form-button>
         {{ formState.mode }}
@@ -63,6 +63,7 @@
 import { computed, reactive } from 'vue';
 import { useUserStore } from '@/store/user.js';
 import { usePostsStore } from '@/store/posts.js';
+import { usePostTextFormatter } from '@/modules/home/composables/format-post-text';
 
 import AppCard from '@/components/AppCard/AppCard.vue';
 import AppLikeCounter from '@/components/AppLikeCounter/AppLikeCounter.vue';
@@ -118,7 +119,7 @@ export default {
       formState.mode = 'REPLY';
     }
 
-    function onReply(post) {
+    function reply(post) {
       if (formState.mode === 'REPLY') {
         postsStore.addPost(post);
       } else if (formState.mode === 'UPDATE') {
@@ -137,15 +138,22 @@ export default {
       formState.mode = 'UPDATE';
       formState.showForm = true;
     }
-    
+
+    function onReply() {
+      formState.formText = `@${props.post.user.username} `;
+      formState.showForm = true;
+    }
+
     return {
       likes,
       formState,
-      onReply,
+      reply,
       onDelete,
       onEdit,
+      onReply,
       getUser: userStore.getUser,
-      getChildren: postsStore.getChildren
+      getChildren: postsStore.getChildren,
+      usePostTextFormatter
     };
   }
 };
@@ -159,7 +167,7 @@ export default {
   flex-direction: column;
   width: 100%;
   max-width: 100%;
-  row-gap: 8px;
+  row-gap: 16px;
 }
 .post-text {
   color: $neutral-medium;

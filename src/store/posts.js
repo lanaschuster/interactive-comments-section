@@ -1,5 +1,16 @@
 import { defineStore } from 'pinia';
 
+function sanitize(string) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+  };
+  const reg = /[&<>]/ig;
+  return string.replace(reg, match => map[match]);
+}
+
+
 export const usePostsStore = defineStore('posts', {
   state: () => ({
     posts: [{
@@ -38,7 +49,7 @@ export const usePostsStore = defineStore('posts', {
     },   {
       id: 4,
       parent: 1,
-      text: 'Duis aliquam, erat a pellentesque rhoncus, purus est tristique nisi, et convallis tortor magna vel elit. Nam ac mauris neque.',
+      text: '@juliusomo, duis aliquam, erat a pellentesque rhoncus, purus est tristique nisi, et convallis tortor magna vel elit. Nam ac mauris neque. @lanaschuster @juliusomo',
       date: '2 days ago',
       likes: 0,
       user: {
@@ -54,6 +65,7 @@ export const usePostsStore = defineStore('posts', {
   actions: {
     addPost(post) {
       post.id = Math.floor(Math.random() * 101) + 3;
+      post.text = sanitize(post.text);
       this.posts.push(post);
     },
     deletePost(id) {
@@ -61,7 +73,7 @@ export const usePostsStore = defineStore('posts', {
     },
     editPost(editedPost) {
       const post = this.posts.find(post => post.id === editedPost.id);
-      post.text = editedPost.text;
+      post.text = sanitize(editedPost.text);
     },
     getChildren(id) {
       return this.posts.filter(post => post.parent === id);

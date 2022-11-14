@@ -15,3 +15,12 @@ $font-weight-bold: 700;
 
 $font-family: 'Rubik', Geneva, Verdana, sans-serif;
 $font-size-paragraph: 1rem;
+
+
+// classes
+
+.username {
+  color: $primary;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+}

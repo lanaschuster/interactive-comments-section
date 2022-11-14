@@ -73,7 +73,7 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: 24px;
+  row-gap: 16px;
 }
 
 @media screen and (max-width: 425px) {

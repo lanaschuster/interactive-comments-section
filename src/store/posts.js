@@ -35,10 +35,21 @@ export const usePostsStore = defineStore('posts', {
         username: 'ramsesmiron',
         isCurrent: false
       }
+    },   {
+      id: 4,
+      parent: 1,
+      text: 'Duis aliquam, erat a pellentesque rhoncus, purus est tristique nisi, et convallis tortor magna vel elit. Nam ac mauris neque.',
+      date: '2 days ago',
+      likes: 0,
+      user: {
+        avatar: '/images/image-ramsesmiron.png',
+        username: 'ramsesmiron',
+        isCurrent: false
+      }
     }]
   }),
   getters: {
-    getPosts: (state) => state.posts,
+    getPosts: (state) => state.posts.filter(post => post.parent === null),
   },
   actions: {
     addPost(post) {
@@ -53,7 +64,7 @@ export const usePostsStore = defineStore('posts', {
       post.text = editedPost.text;
     },
     getChildren(id) {
-      return this.posts.filter(post => post.parent.id === id);
+      return this.posts.filter(post => post.parent === id);
     },
     getPost(id) {
       return this.posts.find(post => post.id === id);

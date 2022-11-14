@@ -1,21 +1,24 @@
 <template>
-  <section>
-    <ThePost
-      v-for="(post, i) in posts"
-      :key="`post_${i}`"
-      v-model:likes="post.likes"
-      :post="post"
-    />
-    <ThePostForm
-      :user="getUser"
-      :parent-id="null"
-      @send="onSend"
-    >
-      <template #form-button>
-        SEND
-      </template>
-    </ThePostForm>
-  </section>
+  <article>
+    <section>
+      <ThePost
+        v-for="(post, i) in posts"
+        :key="`post_${i}`"
+        v-model:likes="post.likes"
+        :post="post"
+        :children="getChildren(post.id)"
+      />
+      <ThePostForm
+        :user="getUser"
+        :parent-id="null"
+        @send="onSend"
+      >
+        <template #form-button>
+          SEND
+        </template>
+      </ThePostForm>
+    </section>
+  </article>
 </template>
 
 <script>
@@ -36,7 +39,7 @@ export default {
     const posts = ref(postsStore.getPosts);
 
     postsStore.$subscribe((_, state) => {
-      posts.value = state.posts;
+      posts.value = state.posts.filter(post => post.parent === null);
     });
 
     function onSend(post) {
@@ -46,7 +49,8 @@ export default {
     return {
       posts,
       onSend,
-      getUser: userStore.getUser
+      getUser: userStore.getUser,
+      getChildren: postsStore.getChildren
     };
   }
 };
@@ -55,18 +59,25 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/main.scss';
 
-section {
+article {
   height: 100%;
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+section {
+  width: 100%;
+  max-width: 768px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 32px;
   row-gap: 24px;
 }
 
 @media screen and (max-width: 425px) {
-  section {
+  article {
     padding: 12px;
   }
 }

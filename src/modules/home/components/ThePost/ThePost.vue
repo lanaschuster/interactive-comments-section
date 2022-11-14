@@ -44,6 +44,18 @@
         {{ formState.mode }}
       </template>
     </ThePostForm>
+    <div 
+      v-if="children && children.length"
+      class="the-post-children" 
+    >
+      <div class="separator" />
+      <ThePost
+        v-for="(child, i) in children"
+        :key="`post_${post.id}_${i}`"
+        :post="child"
+        :children="getChildren(child.id)"
+      />
+    </div>
   </div>
 </template>
 
@@ -72,6 +84,10 @@ export default {
     post: {
       type: Object,
       required: true
+    },
+    children: {
+      type: Array,
+      default: null
     }
   },
   emits: [
@@ -128,7 +144,8 @@ export default {
       onReply,
       onDelete,
       onEdit,
-      getUser: userStore.getUser
+      getUser: userStore.getUser,
+      getChildren: postsStore.getChildren
     };
   }
 };
@@ -141,11 +158,39 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 768px;
+  max-width: 100%;
   row-gap: 8px;
 }
 .post-text {
   color: $neutral-medium;
   line-height: 120%;
+}
+.the-post-children {
+  width: 100%;
+  padding-left: 80px;
+  display: flex;
+  row-gap: 8px;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+
+  .separator {
+    position: absolute;
+    width: 2px;
+    border-radius: 4px;
+    background-color: $neutral-light;
+    height: 100%;
+    margin-left: -40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .the-post-children {
+    padding-left: 24px;
+
+    .separator {
+      margin-left: -24px;
+    }
+  }
 }
 </style>

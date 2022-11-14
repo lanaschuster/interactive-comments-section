@@ -52,6 +52,7 @@
       <ThePost
         v-for="(child, i) in children"
         :key="`post_${post.id}_${i}`"
+        v-model:likes="child.likes"
         :post="child"
         :children="getChildren(child.id)"
       />

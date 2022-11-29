@@ -10,6 +10,11 @@ function sanitize(string) {
   return string.replace(reg, match => map[match]);
 }
 
+const PostStatus = {
+  'DISLIKED': -1,
+  'IDLE': 0,
+  'LIKED': 1,
+};
 
 export const usePostsStore = defineStore('posts', {
   state: () => ({
@@ -19,6 +24,7 @@ export const usePostsStore = defineStore('posts', {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis ex et tortor euismod cursus eget commodo lacus. In varius feugiat ante. In tellus felis, consectetur ut euismod sed, bibendum ac ipsum. Duis aliquam, erat a pellentesque rhoncus, purus est tristique nisi, et convallis tortor magna vel elit. Nam ac mauris neque. Fusce sem nisi, hendrerit ac euismod nec, porttitor ut quam. Sed venenatis tincidunt nunc quis scelerisque.',
       date: '1 month ago',
       likes: 10,
+      status: PostStatus.IDLE,
       user: {
         avatar: '/images/image-juliusomo.png',
         username: 'juliusomo',
@@ -30,6 +36,7 @@ export const usePostsStore = defineStore('posts', {
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce venenatis ex et tortor euismod cursus eget commodo lacus. In varius feugiat ante. In tellus felis, consectetur ut euismod sed, bibendum ac ipsum. Duis aliquam, erat a pellentesque rhoncus, purus est tristique nisi, et convallis tortor magna vel elit. Nam ac mauris neque. Fusce sem nisi, hendrerit ac euismod nec, porttitor ut quam. Sed venenatis tincidunt nunc quis scelerisque.',
       date: '1 month ago',
       likes: 2,
+      status: PostStatus.IDLE,
       user: {
         avatar: '/images/image-amyrobson.png',
         username: 'lanaschuster',
@@ -41,6 +48,7 @@ export const usePostsStore = defineStore('posts', {
       text: 'Lorem ipsum dolor sit amet.',
       date: '2 months ago',
       likes: -1,
+      status: PostStatus.DISLIKED,
       user: {
         avatar: '/images/image-ramsesmiron.png',
         username: 'ramsesmiron',
@@ -51,7 +59,8 @@ export const usePostsStore = defineStore('posts', {
       parent: 1,
       text: '@juliusomo, duis aliquam, erat a pellentesque rhoncus, purus est tristique nisi, et convallis tortor magna vel elit. Nam ac mauris neque. @lanaschuster @juliusomo',
       date: '2 days ago',
-      likes: 0,
+      likes: 1,
+      status: PostStatus.LIKED,
       user: {
         avatar: '/images/image-ramsesmiron.png',
         username: 'ramsesmiron',
@@ -80,6 +89,28 @@ export const usePostsStore = defineStore('posts', {
     },
     getPost(id) {
       return this.posts.find(post => post.id === id);
+    },
+    likePost(id) {
+      const post = this.posts.find(post => post.id === id);
+
+      if (post.status === PostStatus.DISLIKED) { 
+        post.status = PostStatus.IDLE;
+        post.likes++;
+      } else if (post.status === PostStatus.IDLE) {
+        post.status = PostStatus.LIKED;
+        post.likes++;
+      }
+    },
+    dislikePost(id) {
+      const post = this.posts.find(post => post.id === id);
+
+      if (post.status === PostStatus.LIKED) {
+        post.status = PostStatus.IDLE;
+        post.likes--;
+      } else if (post.status === PostStatus.IDLE) {
+        post.status = PostStatus.DISLIKED;
+        post.likes--;
+      }
     }
   }
 });

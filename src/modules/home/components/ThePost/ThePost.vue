@@ -5,8 +5,11 @@
       <ThePostLayout>
         <template #side>
           <AppLikeCounter
-            v-model="likes"
+            :likes="post.likes"
+            :status="post.status"
             data-testid="likeCounter"
+            @like="onLike"
+            @dislike="onDislike"
           />
         </template>
         <template #header>
@@ -61,7 +64,7 @@
 </template>
 
 <script>
-import { computed, reactive } from 'vue';
+import { reactive } from 'vue';
 import { useUserStore } from '@/store/user.js';
 import { usePostsStore } from '@/store/posts.js';
 import { usePostTextFormatter } from '@/modules/home/composables/format-post-text';
@@ -92,21 +95,9 @@ export default {
       default: null
     }
   },
-  emits: [
-    'update:likes'
-  ],
-  setup(props, { emit }) {
+  setup(props) {
     const userStore = useUserStore();
     const postsStore = usePostsStore();
-
-    const likes = computed({
-      set: (value) => {
-        emit('update:likes', value);
-      },
-      get: () => {
-        return props.post.likes;
-      }
-    });
 
     const formState = reactive({
       showForm: false,
@@ -145,13 +136,22 @@ export default {
       formState.showForm = true;
     }
 
+    function onLike() {
+      postsStore.likePost(props.post.id);
+    }
+
+    function onDislike() {
+      postsStore.dislikePost(props.post.id);
+    }
+
     return {
-      likes,
       formState,
       reply,
       onDelete,
       onEdit,
       onReply,
+      onLike,
+      onDislike,
       getUser: userStore.getUser,
       getChildren: postsStore.getChildren,
       usePostTextFormatter

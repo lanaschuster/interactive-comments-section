@@ -2,14 +2,16 @@
   <div class="app-like-counter">
     <i
       class="fa-solid fa-plus icon like"
+      :class="[status === 1 && 'selected']"
       data-testid="plus"
       @click="like"
     />
     <span class="counter">
-      {{ modelValue }}
+      {{ likes }}
     </span>
     <i
       class="fa-solid fa-minus icon dislike"
+      :class="[status === -1 && 'selected']"
       data-testid="minus"
       @click="dislike"
     />
@@ -19,19 +21,23 @@
 <script>
 export default {
   props: {
-    modelValue: {
+    likes: {
+      type: Number,
+      default: 0
+    },
+    status: {
       type: Number,
       default: 0
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['like', 'dislike'],
   setup(props, { emit }) {
     const like = () => {
-      emit('update:modelValue', props.modelValue+1);
+      emit('like',true);
     };
 
     const dislike = () => {
-      emit('update:modelValue', props.modelValue-1);
+      emit('dislike', true);
     };
 
     return {
@@ -80,6 +86,10 @@ export default {
 
   .counter {
     position: absolute;
+  }
+
+  .selected {
+    color: $primary;
   }
 }
 

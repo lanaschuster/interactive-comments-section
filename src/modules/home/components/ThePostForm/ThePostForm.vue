@@ -5,13 +5,16 @@
         :src="user.avatar"
         variant="small"
         data-testid="avatar"
+        class="avatar"
       />
       <AppTextarea
         v-model="message"
         data-testid="textarea"
+        class="field"
       />
       <AppButton 
         data-testid="submit"
+        class="button"
         @click="send"
       >
         <slot name="form-button" />
@@ -82,7 +85,30 @@ export default {
   max-width: 768px;
 }
 .post-form-layout {
-  display: flex;
+  display: grid;
   column-gap: 16px;
+  grid-template-areas: 'avatar field button';
+  grid-template-columns: max-content auto max-content;
+  
+  .avatar {
+    grid-area: avatar;
+  }
+
+  .field {
+    grid-area: field;
+  }
+
+  .button {
+    grid-area: button;
+  }
+}
+@media screen and (max-width: 768px) {
+  .post-form-layout {
+    row-gap: 16px;
+    grid-template-areas: 
+      'field field'
+      'avatar button';
+    grid-template-columns: auto min-content;
+  }
 }
 </style>

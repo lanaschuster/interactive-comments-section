@@ -15,7 +15,7 @@ export default {
       type: String,
       default: 'primary',
       validator(value) {
-        return ['primary', 'danger'].includes(value);
+        return ['primary', 'secondary', 'danger'].includes(value);
       }
     },
     type: {
@@ -94,6 +94,25 @@ export default {
     color: $danger-medium;
     &:hover {
       color: $danger-light;
+    }
+  }
+}
+.secondary {
+  color: $white;
+  background-color: $neutral-medium;
+
+  &:hover {
+    background-color: $neutral-medium-light;
+  }
+  &:active {
+    border-color: $neutral-medium;
+  }
+
+  &.text {
+    background-color: transparent;
+    color: $neutral-medium;
+    &:hover {
+      color: $neutral-medium-light;
     }
   }
 }

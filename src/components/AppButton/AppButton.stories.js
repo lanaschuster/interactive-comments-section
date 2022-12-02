@@ -24,6 +24,17 @@ PrimaryText.args = {
   type: 'text'
 };
 
+export const Secondary = Template.bind({});
+Secondary.args = {
+  variant: 'secondary'
+};
+
+export const SecondaryText = Template.bind({});
+SecondaryText.args = {
+  variant: 'secondary',
+  type: 'text'
+};
+
 export const Danger = Template.bind({});
 Danger.args = {
   variant: 'danger'

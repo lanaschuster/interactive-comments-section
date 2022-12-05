@@ -61,10 +61,15 @@
       />
     </div>
   </div>
+  <ThePostDeletionModal
+    v-if="isDeletingPost"
+    @close="isDeletingPost = false"
+    @confirm="onDeletePost"
+  />
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { useUserStore } from '@/store/user.js';
 import { usePostsStore } from '@/store/posts.js';
 import { usePostTextFormatter } from '@/modules/home/composables/format-post-text';
@@ -75,6 +80,7 @@ import ThePostHeader from '@/modules/home/components/ThePostHeader/ThePostHeader
 import ThePostActions from '@/modules/home/components/ThePostActions/ThePostActions.vue';
 import ThePostForm from '@/modules/home/components/ThePostForm/ThePostForm.vue';
 import ThePostLayout from '@/modules/home/layouts/ThePostLayout.vue';
+import ThePostDeletionModal from '@/modules/home/components/ThePostDeletionModal/ThePostDeletionModal.vue';
 
 export default {
   components: {
@@ -83,7 +89,8 @@ export default {
     ThePostHeader,
     ThePostForm,
     ThePostLayout,
-    ThePostActions
+    ThePostActions,
+    ThePostDeletionModal
   },
   props: {
     post: {
@@ -98,6 +105,7 @@ export default {
   setup(props) {
     const userStore = useUserStore();
     const postsStore = usePostsStore();
+    const isDeletingPost = ref(false);
 
     const formState = reactive({
       showForm: false,
@@ -121,8 +129,8 @@ export default {
       resetForm();
     }
 
-    function onDelete(postId) {
-      postsStore.deletePost(postId);
+    async function onDelete() {
+      isDeletingPost.value = true;
     }
 
     function onEdit(post) {
@@ -144,8 +152,14 @@ export default {
       postsStore.dislikePost(props.post.id);
     }
 
+    function onDeletePost() {
+      isDeletingPost.value = false;
+      postsStore.deletePost(props.post.id);
+    }
+
     return {
       formState,
+      isDeletingPost,
       reply,
       onDelete,
       onEdit,
@@ -154,7 +168,8 @@ export default {
       onDislike,
       getUser: userStore.getUser,
       getChildren: postsStore.getChildren,
-      usePostTextFormatter
+      usePostTextFormatter,
+      onDeletePost
     };
   }
 };

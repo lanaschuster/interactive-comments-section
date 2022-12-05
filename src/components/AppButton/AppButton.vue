@@ -46,8 +46,8 @@ export default {
   outline: none;
   cursor: pointer;
   font-size: 14px;
-  border-radius: 4px;
-  padding: 12px 16px;
+  border-radius: 8px;
+  padding: 12px 24px;
   box-sizing: border-box;
   font-family: $font-family;
   border: 1px solid transparent;

@@ -116,4 +116,7 @@ export default {
     }
   }
 }
+.text {
+  padding: 8px;
+}
 </style>

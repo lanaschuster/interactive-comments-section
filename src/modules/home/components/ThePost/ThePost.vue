@@ -125,12 +125,7 @@ export default {
     }
 
     function reply(post) {
-      if (formState.mode === 'REPLY') {
-        postsStore.addPost(post);
-      } else if (formState.mode === 'UPDATE') {
-        postsStore.editPost(post);
-      }
-
+      postsStore.addPost(post);
       resetForm();
     }
 

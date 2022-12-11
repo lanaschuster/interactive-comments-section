@@ -111,6 +111,10 @@ export const usePostsStore = defineStore('posts', {
         post.status = PostStatus.DISLIKED;
         post.likes--;
       }
+    },
+    updatePost(editedPost, text) {
+      const post = this.posts.find(post => post.id === editedPost.id);
+      post.text = sanitize(text);
     }
   }
 });

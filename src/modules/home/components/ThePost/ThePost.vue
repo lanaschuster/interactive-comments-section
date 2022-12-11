@@ -19,7 +19,13 @@
           />
         </template>
         <template #body>
+          <ThePostUpdateForm
+            v-if="formState.mode === 'UPDATE'"
+            :post-content="post.text"
+            @update:post-text="onUpdate"
+          />
           <p
+            v-else
             class="post-text"
             data-testid="postContent"
             v-html="usePostTextFormatter(post.text)"
@@ -35,12 +41,11 @@
         </template>
       </ThePostLayout>
     </AppCard>
-    <ThePostForm 
-      v-if="formState.showForm"
+    <ThePostForm
+      v-if="formState.mode === 'REPLY'"
       :user="getUser"
-      :parent-id="formState.mode === 'REPLY' ? post.id : null"
-      :post-id="formState.mode === 'UPDATE' ? post.id : null"
       :text="formState.formText"
+      :parent-id="post.id"
       @send="reply"
     >
       <template #form-button>
@@ -81,6 +86,7 @@ import ThePostActions from '@/modules/home/components/ThePostActions/ThePostActi
 import ThePostForm from '@/modules/home/components/ThePostForm/ThePostForm.vue';
 import ThePostLayout from '@/modules/home/layouts/ThePostLayout.vue';
 import ThePostDeletionModal from '@/modules/home/components/ThePostDeletionModal/ThePostDeletionModal.vue';
+import ThePostUpdateForm from '@/modules/home/components/ThePostUpdateForm/ThePostUpdateForm.vue';
 
 export default {
   components: {
@@ -90,7 +96,8 @@ export default {
     ThePostForm,
     ThePostLayout,
     ThePostActions,
-    ThePostDeletionModal
+    ThePostDeletionModal,
+    ThePostUpdateForm
   },
   props: {
     post: {
@@ -108,15 +115,13 @@ export default {
     const isDeletingPost = ref(false);
 
     const formState = reactive({
-      showForm: false,
       formText: '',
-      mode: 'REPLY'
+      mode: 'IDLE'
     });
 
     function resetForm() {
-      formState.showForm = false;
       formState.formText = '';
-      formState.mode = 'REPLY';
+      formState.mode = 'IDLE';
     }
 
     function reply(post) {
@@ -129,6 +134,11 @@ export default {
       resetForm();
     }
 
+    function onUpdate(postText) {
+      postsStore.updatePost(props.post, postText);
+      formState.mode = 'IDLE';
+    }
+
     async function onDelete() {
       isDeletingPost.value = true;
     }
@@ -136,12 +146,11 @@ export default {
     function onEdit(post) {
       formState.formText = post.text;
       formState.mode = 'UPDATE';
-      formState.showForm = true;
     }
 
     function onReply() {
       formState.formText = `@${props.post.user.username} `;
-      formState.showForm = true;
+      formState.mode = 'REPLY';
     }
 
     function onLike() {
@@ -166,10 +175,11 @@ export default {
       onReply,
       onLike,
       onDislike,
+      onUpdate,
+      onDeletePost,
       getUser: userStore.getUser,
       getChildren: postsStore.getChildren,
-      usePostTextFormatter,
-      onDeletePost
+      usePostTextFormatter
     };
   }
 };

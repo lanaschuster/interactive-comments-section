@@ -1,35 +1,66 @@
 # Interactive Comments Section
 
-(Under construction)
+This is a solution to the [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Tasks
+![](./docs/screenshot.png)
+
+## Table of contents
+
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+- [Author](#author)
+- [Setup](#setup)
+
+## Overview
+
+### The challenge
+
+Users should be able to:
+
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Create, Read, Update, and Delete comments and replies
+- Upvote and downvote comments
+
+### Links
+
+- Repo: [https://github.com/lanaschuster/interactive-comments-section](https://github.com/lanaschuster/interactive-comments-section)
+- Live Site URL: [https://luminous-froyo-db642c.netlify.app/](https://luminous-froyo-db642c.netlify.app/)
+
+## My process
+
+### Built with
+
+- Semantic HTML5 markup
+- Flexbox
+- CSS Grid
+- Scss
+- [Storybook](https://storybook.js.org/) - for components documentation
+- [Vue](https://vuejs.org/) - JS library
+- [Vue Test Utils](https://test-utils.vuejs.org/) - for testing
+- [Pinia](https://pinia.vuejs.org/) - for state management
+
+### What I learned
+
+- I have learned to use recursive component call, to render the post tree;
+- I have learned to use Pinia.
+
+### Continued development
+
+- Keep the posts with localStorage or IndexedDB;
+- Add toast to inform the current user about the actions.
 
 
-- (done) Criar folha de estilos (design system)
-- (done) Criar componente avatar 
-  -- variantes: small, medium
-- (done) Criar componente button 
-  -- type: default, text;
-  -- variants: primary, danger;
-- (done) Criar componente card
-- (done) Criar componente textarea
-- (done) Criar componente tag
-- (done) Criar componente user
-  -- possui um avatar small;
-  -- possui label com username;
-  -- possui uma tag para indicar se é o próprio usuário logado (tag "you")
-- (done) Criar componente contador
-- (done) Criar componente link
-- Criar componente Comentário
-  -- modos: visualização, edição
-- Criar componente modal
+## Author
 
-Extra:
-- Permitir ocultar os comentários de um post
-  -- quando estiver fechado, mostrar um indicador de quantos comentários possui
-- Criar componente toast
-  -- para apresentar uma resposta de sucesso ou erro após cada ação do usuário
-
+- Linkedin - [Lana Schuster](https://www.linkedin.com/in/lana-schuster-48b896195/)
+- Frontend Mentor - [@lanaschuster](https://www.frontendmentor.io/profile/lanaschuster)
+- Github - [@lanaschuster](https://github.com/lanaschuster)
 
 ## Setup
 
@@ -46,7 +77,6 @@ Extra:
 
   $ yarn build 	      // to generate the bundle in production mode
 ```
-
 
 ## Contributing
 
